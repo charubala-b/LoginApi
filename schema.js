@@ -18,9 +18,6 @@ const saleSchema=new mongoose.Schema({
     },
     Amount:{
         type:Number
-    },
-    file:{
-        type:String
     }
 })
 

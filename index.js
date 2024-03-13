@@ -63,8 +63,7 @@ app.post('/add-sales',async function(request,response){
     await Sales.create({
         "Oname" : request.body.Oname,
         "Address" : request.body.Address,
-        "Amount":request.body.Amount,
-        "file":request.body.file
+        "Amount":request.body.Amount
        });
        response.status(200).json({
         "status":"inserted sucessfully"
