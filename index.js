@@ -1,6 +1,6 @@
 const mongoose= require('mongoose')
 const express = require('express')
-const {Details} = require('./schema.js')
+const {Details,Sales} = require('./schema.js')
 const bodyparser=require('body-parser')
 const cors = require('cors')
 
@@ -23,6 +23,7 @@ async function connectTodb(){
 }
 connectTodb();
 
+//login
 app.post('/add-details',async function(request,response){
     try{
     await Details.create({
@@ -46,6 +47,42 @@ app.get('/get-details',async function(request,response){
     const logindetails=await Details.find();
     response.status(200).json({
         "total":logindetails
+    })
+    }
+    catch(error){
+        response.status(500).json({
+            "status":"not sucessfully recieved",
+            "error":error
+        });
+    }
+})
+
+//sales
+app.post('/add-sales',async function(request,response){
+    try{
+    await Sales.create({
+        "Oname" : request.body.Oname,
+        "Address" : request.body.Address,
+        "Amount":request.body.Amount,
+        "file":request.body.file
+       });
+       response.status(200).json({
+        "status":"inserted sucessfully"
+       });
+    }
+    catch(error){
+        response.status(401).json({
+            "error-occurrence":error,
+            "status":"not inserted sucessfully"
+        });
+    }
+})
+
+app.get('/get-sales',async function(request,response){
+    try{
+    const saledetails=await Sales.find();
+    response.status(200).json({
+        "total":saledetails
     })
     }
     catch(error){

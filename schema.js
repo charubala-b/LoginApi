@@ -9,7 +9,24 @@ const loginSchema=new mongoose.Schema({
         type: String
     },
 })
+const saleSchema=new mongoose.Schema({
+    Oname:{
+        type:String
+    },
+    Address:{
+        type:String
+    },
+    Amount:{
+        type:Number
+    },
+    file:{
+        type:String
+    }
+})
+
 const Details=mongoose.model('logindetails',loginSchema)
 
-module.exports={Details};
+const Sales=mongoose.model('saledetails',saleSchema)
+
+module.exports={Details,Sales};
 
