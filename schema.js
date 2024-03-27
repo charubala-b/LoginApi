@@ -21,9 +21,23 @@ const saleSchema=new mongoose.Schema({
     }
 })
 
+const feesdSchema=new mongoose.Schema({
+    name:{
+        type:String
+    },
+    college:{
+        type:String
+    },
+    view:{
+        type:String
+    }
+})
+
 const Details=mongoose.model('logindetails',loginSchema)
 
 const Sales=mongoose.model('saledetails',saleSchema)
 
-module.exports={Details,Sales};
+const Feed=mongoose.model('feeddetails',feesdSchema)
+
+module.exports={Details,Sales,Feed};
 

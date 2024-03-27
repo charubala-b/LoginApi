@@ -1,6 +1,6 @@
 const mongoose= require('mongoose')
 const express = require('express')
-const {Details,Sales} = require('./schema.js')
+const {Details,Sales,Feed} = require('./schema.js')
 const bodyparser=require('body-parser')
 const cors = require('cors')
 
@@ -91,6 +91,42 @@ app.get('/get-sales',async function(request,response){
         });
     }
 })
+
+//feedback
+app.post('/add-feed',async function(request,response){
+    try{
+    await Feed.create({
+        "name" : request.body.name,
+        "college" : request.body.college,
+        "view":request.body.view
+       });
+       response.status(200).json({
+        "status":"inserted sucessfully"
+       });
+    }
+    catch(error){
+        response.status(401).json({
+            "error-occurrence":error,
+            "status":"not inserted sucessfully"
+        });
+    }
+})
+
+app.get('/get-feed',async function(request,response){
+    try{
+    const feeddetails=await Feed.find();
+    response.status(200).json({
+        "total":feeddetails
+    })
+    }
+    catch(error){
+        response.status(500).json({
+            "status":"not sucessfully recieved",
+            "error":error
+        });
+    }
+})
+
 
 
 
